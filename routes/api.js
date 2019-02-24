@@ -1,7 +1,7 @@
 const API_PATH = '/api';
 const films = require("../resources/films.json");
 const mongo = require("../db/connect");
-const { postFilm, getFilms, getFilmByID } = require("../db");
+const { postFilm, getFilms, getFilmByID, deleteFilm, updateFilm } = require("../db");
 
 module.exports = (app) => {
     app.get(`${API_PATH}/films`, async (req, res)=>{
@@ -22,5 +22,24 @@ module.exports = (app) => {
             return res.json(resp);
         }
         res.status(400).send({ reason: "No film sent." });
+    })
+
+    app.delete(`${API_PATH}/films/:id`, async (req, res)=>{
+        const id = req.params.id;
+        if (id) { 
+            const resp = await deleteFilm(id);
+            return res.json(resp);
+        }
+        res.status(400).send({ reason: "No film delete." });
+    })
+
+    app.put(`${API_PATH}/films/:id`, async (req, res)=>{
+        const id = req.params.id;
+        const title = JSON.parse(req.body.film).title;
+        if (title) { 
+            const resp = await updateFilm(id, title);
+            return res.json(resp);
+        }
+        res.status(400).send({ reason: "No film update." });
     })
 }
