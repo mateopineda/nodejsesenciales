@@ -3,4 +3,5 @@ module.exports = {
     diff: (a,b) => a-b,
     prod: (a,b) => a*b,
     div: (a,b) => a/b,
+    square: (a) => a*a
 }

@@ -34,4 +34,12 @@ describe('Math module', function() {
       assert.equal(math.div(1, 0), Infinity);
     });
   });
+  describe('@square', function(){
+    it('should return 9 when param is 3', function(){
+      assert.equal(math.square(3),9)
+    })
+    it('should return 16 when param is 4', function(){
+      assert.equal(math.square(4),16)
+    })
+  })
 });
